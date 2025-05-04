@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Client</title>
+</head>
+<body>
+    <div>
+        <label for="ipAddress">IP 位址:(ws://localhost:8000/ws)</label>
+        <input type="text" id="ipAddress" value="localhost">
+    </div>
+    <div>
+        <label for="port">埠口:</label>
+        <input type="number" id="port" value="8000">
+    </div>
+    <button onclick="connectWebSocket()">連線</button>
+    <hr>
+    <div>
+        <label for="messageInput">訊息:</label>
+        <input type="text" id="messageInput">
+        <button onclick="sendMessage()">傳送</button>
+    </div>
+    <div id="output"></div>
+
+    <script>
+        let websocket;
+        const outputDiv = document.getElementById('output');
+        const ipAddressInput = document.getElementById('ipAddress');
+        const portInput = document.getElementById('port');
+        const messageInput = document.getElementById('messageInput');
+
+        function connectWebSocket() {
+            const ip = ipAddressInput.value;
+            const port = portInput.value;
+            const uri = `ws://${ip}:${port}/ws`;
+
+            websocket = new WebSocket(uri);
+
+            websocket.onopen = (event) => {
+                console.log('已連接到 WebSocket 伺服器:', uri);
+                outputDiv.innerHTML += `<div>已連接到伺服器: ${uri}</div>`;
+            };
+
+            websocket.onmessage = (event) => {
+                console.log('接收到訊息:', event.data);
+                outputDiv.innerHTML += `<div>伺服器回覆: ${event.data}</div>`;
+            };
+
+            websocket.onclose = (event) => {
+                console.log('WebSocket 連線已關閉');
+                outputDiv.innerHTML += '<div>連線已關閉</div>';
+            };
+
+            websocket.onerror = (error) => {
+                console.error('WebSocket 發生錯誤:', error);
+                outputDiv.innerHTML += `<div>發生錯誤: ${error}</div>`;
+            };
+        }
+
+        function sendMessage() {
+            if (websocket && websocket.readyState === WebSocket.OPEN) {
+                const message = messageInput.value;
+                websocket.send(message);
+                outputDiv.innerHTML += `<div>你傳送了: ${message}</div>`;
+                messageInput.value = '';
+            } else {
+                outputDiv.innerHTML += '<div>尚未連線到伺服器，請先點擊 "連線" 按鈕。</div>';
+            }
+        }
+    </script>
+</body>
+</html>
