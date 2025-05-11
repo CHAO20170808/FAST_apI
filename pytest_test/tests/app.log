@@ -1,0 +1,11 @@
+time 2025-05-12 00:43:48, INFO: method: GET, call: /item/1, ip: testclient
+time 2025-05-12 00:45:08, INFO: method: GET, call: /item/1, ip: testclient
+time 2025-05-12 00:47:42, INFO: method: GET, call: /item/1, ip: testclient
+time 2025-05-12 00:55:04, INFO: method: GET, call: /item/3, ip: testclient
+time 2025-05-12 00:56:53, INFO: method: GET, call: /item/4, ip: testclient
+time 2025-05-12 00:58:09, INFO: method: POST, call: /item, ip: testclient
+time 2025-05-12 00:58:09, INFO: method: GET, call: /item/1, ip: testclient
+time 2025-05-12 00:58:09, INFO: method: GET, call: /item/999, ip: testclient
+time 2025-05-12 01:03:02, INFO: method: POST, call: /item, ip: testclient
+time 2025-05-12 01:03:02, INFO: method: GET, call: /item/1, ip: testclient
+time 2025-05-12 01:03:02, INFO: method: GET, call: /item/999, ip: testclient
